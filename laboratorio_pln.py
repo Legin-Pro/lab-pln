@@ -32,7 +32,7 @@ print(f"Stemming: {stems}")
 
 # --- API: palabras clave + sinónimos/antónimos ---
 resp = client.chat.completions.create(
-    model="llama3-8b-8192",
+    model="llama-3.3-70b-versatile",
     messages=[{"role":"user","content":
         f"Del texto: '{' '.join(sin_stop)}'\n"
         f"Dame un JSON con: palabras_clave (lista de 5), y para cada una: sinonimos y antonimos.\n"
@@ -63,7 +63,7 @@ for i, c in enumerate(correos):
 
 # --- API: clasificar spam + NER ---
 resp2 = client.chat.completions.create(
-    model="llama3-8b-8192",
+    model="llama-3.3-70b-versatile",
     messages=[{"role":"user","content":
         f"Clasifica cada correo como spam o legítimo, y extrae personas y organizaciones.\n"
         f"Responde en JSON con lista: id, tipo, personas, organizaciones.\n"
@@ -89,7 +89,7 @@ opiniones = [
 ]
 
 resp3 = client.chat.completions.create(
-    model="llama3-8b-8192",
+    model="llama-3.3-70b-versatile",
     messages=[{"role":"user","content":
         "Asigna un score de sentimiento de -1.0 a 1.0 a cada opinión.\n"
         "Responde SOLO un JSON: lista con fecha y score.\n"
@@ -154,7 +154,7 @@ while True:
 
     historial.append({"role":"user","content":entrada})
     resp4 = client.chat.completions.create(
-        model="llama3-8b-8192",
+        model="llama-3.3-70b-versatile",
         messages=[{"role":"system","content":system}] + historial,
         temperature=0.7, max_tokens=150
     )
